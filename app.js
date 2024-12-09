@@ -8,10 +8,11 @@ const PORT = process.env.PORT || 5000; // Default to 5000 if PORT is not set in 
 
 // CORS configuration to allow frontend to make requests
 app.use(cors({
-    origin: 'https://et-frontend-sb72.vercel.app', // Your frontend URL
+    origin: ['https://et-frontend-sb72.vercel.app', 'http://localhost:3000'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
 
 // Middleware for JSON parsing
 app.use(express.json());
