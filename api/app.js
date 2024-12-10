@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
-const { db } = require('../backend/db/db'); // Correct path to db.js
+const { db } = require('../../backend/db/db'); // Correct path to db.js
 const { readdirSync } = require('fs');
 const path = require('path');
 const app = express();
@@ -21,7 +21,7 @@ app.use(express.json());
 const routesPath = path.join(__dirname, './routes');
 readdirSync(routesPath).forEach((file) => {
     const route = require(path.join(routesPath, file));
-    app.use('/api/v1', route);
+    app.use('/api', route);
 });
 
 // Start the server and connect to the database
