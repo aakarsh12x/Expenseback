@@ -8,10 +8,15 @@ const app = express();
 const PORT = process.env.PORT || 5000; // Default to 5000 if PORT is not set in .env
 
 // CORS configuration to allow frontend to make requests
+const cors = require('cors');
+
+// Middleware for CORS configuration
 app.use(cors({
     origin: ['https://et-frontend-sb72.vercel.app', 'http://localhost:3000'], // Allow multiple origins
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],  // Allow multiple HTTP methods
+    allowedHeaders: ['Content-Type', 'Authorization'],    // Allow specific headers
+    preflightContinue: false,                             // Ensure that the OPTIONS request ends correctly
+    optionsSuccessStatus: 204                             // Some legacy browsers (IE11) choke on 204
 }));
 
 // Middleware for JSON parsing
