@@ -1,8 +1,8 @@
 // routes/incomeExpense.js
 
 const express = require('express');
-const { addIncome, deleteIncome, getIncomes } = require('../../../back/controllers/income');
-const { addExpense, getExpense, deleteExpense } = require('../../../back/controllers/expense');
+const { addIncome, deleteIncome, getIncomes } = require('../../back/controllers/income');
+const { addExpense, getExpense, deleteExpense } = require('../../back/controllers/expense');
 
 const router = express.Router();
 
