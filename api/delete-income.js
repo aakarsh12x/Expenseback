@@ -1,13 +1,41 @@
-const IncomeSchema = require('../models/incomeModel');
+const ExpenseSchema = require('../models/expenseModel');
 
 module.exports = async (req, res) => {
+  // Handle CORS preflight requests
+  if (req.method === 'OPTIONS') {
+    res.setHeader('Access-Control-Allow-Origin', '*'); // Replace '*' with your frontend URL in production
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader('Access-Control-Max-Age', '86400'); // Cache preflight response for 24 hours
+    return res.status(204).end(); // Respond to preflight request
+  }
+
+  // Allow CORS for the main request
+  res.setHeader('Access-Control-Allow-Origin', '*'); // Replace '*' with your frontend URL in production
+
+  if (req.method === 'DELETE') {
     const { id } = req.query;
 
     try {
-        await IncomeSchema.findByIdAndDelete(id);
-        res.status(200).json({ message: "Income deleted successfully" });
+      // Validate ID
+      if (!id) {
+        return res.status(400).json({ message: "Expense ID is required." });
+      }
+
+      const deletedExpense = await ExpenseSchema.findByIdAndDelete(id);
+
+      // Check if the expense was found and deleted
+      if (!deletedExpense) {
+        return res.status(404).json({ message: "Expense not found." });
+      }
+
+      res.status(200).json({ message: "Expense deleted successfully" });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: "Server error" });
+      console.error("Error deleting expense:", error);
+      res.status(500).json({ message: "Server error", error: error.message });
     }
+  } else {
+    // Handle unsupported methods (non-DELETE requests)
+    res.status(404).json({ message: "Route not found" });
+  }
 };
