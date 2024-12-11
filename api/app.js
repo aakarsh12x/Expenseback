@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 5000;
 // CORS configuration
 app.use(
     cors({
-        origin: ['https://et-frontend-sb72.vercel.app', 'http://localhost:3000'], // Correct frontend URLs
+        origin: ['https://et-frontend-sb72-epb7rydpw-aakarsh12xs-projects.vercel.app', 'http://localhost:3000'], // Correct frontend URLs
         methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
         allowedHeaders: ['Content-Type', 'Authorization'],
         preflightContinue: false,
