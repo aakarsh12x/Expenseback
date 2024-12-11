@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
-const { db } = require('../../backend/db/db'); // Correct path to db.js
+const { db } = require('../../back/utils/db'); // Correct path to db.js
 const { readdirSync } = require('fs');
 const path = require('path');
 const app = express();
